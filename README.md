@@ -1,1 +1,2 @@
 # ObjectOrientedJSGame
+I created this browser-based, Star Trek themed word guessing game for the Treehouse Full Stack Javascript Techdegree. Building upon provided CSS and HTML I use Object-Oriented Javascript to select a random, hidden phrase, which a player tries to guess, by clicking letters on an onscreen keyboard. I also added additional CSS styling, images and custom icons to track the player's lives.
