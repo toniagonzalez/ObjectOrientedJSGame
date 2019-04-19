@@ -4,8 +4,8 @@
 /* Variables */
 
 :root {
-  --color-win: #78CF82;
-  --color-lose: #D94545;
+  /* --color-win: #78CF82;
+  --color-lose: #D94545; */
   --color-start: #5b85b7;
   --color-neutral: #445069;
   --color-neutral-light: #D2D2D2;
@@ -178,7 +178,8 @@ button {
 }
 
 .title {
-  color: #FFF;
+  /* color: #FFF; */
+  color: yellow;
 }
 
 .start {
@@ -195,7 +196,8 @@ button {
   text-align: center;
 }
 .win {
-  background-color: var(--color-win);
+  background: linear-gradient(rgba(0, 0, 0, .4) 60%, #000),
+              url('../images/gascloud.jpg');
 }
 
 .win a {
@@ -203,7 +205,8 @@ button {
 }
 
 .lose {
-  background-color: #f5785f;
+  background: linear-gradient(transparent, #000),
+              url('../images/starclusters.jpg');
 }
 
 .lose a {

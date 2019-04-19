@@ -9,29 +9,15 @@ $('#qwerty').append(hint);
 
 
 //Array of Phrases for the Game
-const array = [
-                ['Resistance is Futile','Slogan of the Borg'],
-                ['Beverly Crusher','Doctor on Star Trek Next Generation'],
-                ['USS Voyager','Ship of Captain Janeway'],
-                ['Benjamin Sisko','Emissary to the Prophets on Deep Space 9'],
-                ['Lenoard Nimoy','Actor who played Spock'],
+let phrasesObjectArray = [
+                new Phrase('Resistance is Futile','Slogan of the Borg'),
+                new Phrase('Beverly Crusher','Doctor on Star Trek Next Generation'),
+                new Phrase('USS Voyager','Ship of Captain Janeway'),
+                new Phrase('Benjamin Sisko','Emissary to the Prophets on Deep Space 9'),
+                new Phrase('Lenoard Nimoy','Actor who played Spock'),
               ];
 
-
-//Creates an Array of Phrase Obects from array
-let phrasesObjectArray;
-
-function createPhrasesObjectArray() {
-  phrasesObjectArray = [];
-  for (let i=0; i< array.length; i++){
-      const phrase = new Phrase(array[i][0], array[i][1]);
-     phrasesObjectArray.push(phrase);
-  }
-}
-
-
 //Creates new Game Object with Phrases Object Array
-createPhrasesObjectArray();
 const game = new Game(phrasesObjectArray);
 
 
