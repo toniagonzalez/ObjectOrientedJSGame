@@ -91,7 +91,7 @@ class Game {
 
     //Reset keyboard
     for (let i=0; i< $('#qwerty .keyrow button').length; i++){
-      $('#qwerty .keyrow button').removeClass('chosen').prop('disabled', false);
+      $('#qwerty .keyrow button').removeClass('chosen').removeClass('wrong').prop('disabled', false);
       this.enable();
     }
 
@@ -110,13 +110,17 @@ class Game {
   /**
   *Calls interactive functions: checkLetter, showMatchedLetter, removeLife and check for win) -checkForWin(which calls gameOver)
   */
-  handleInteraction(guess){
+  handleInteraction(guess, guessKey){
+    console.log(guessKey);
+    console.log(guess)
     this.activePhrase.checkLetter(guess);
     if (this.activePhrase.checkLetter(guess) === true){
+      $(guessKey).addClass('chosen').prop('disabled', true);
       this.activePhrase.showMatchedLetter(guess);
       this.checkForWin();
     }
     else {
+      $(guessKey).addClass('wrong').prop('disabled', true);
       this.removeLife();
       this.checkForWin();
     }

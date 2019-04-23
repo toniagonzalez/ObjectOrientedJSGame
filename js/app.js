@@ -31,8 +31,8 @@ startButton.on('click', ()=>{
 //Onscreen Qwerty Event Listener
 $('#qwerty').on('click', 'button.key', (e)=> {
   let guess = e.target.innerText;
-  $(e.target).addClass('chosen').prop('disabled', true);
-  game.handleInteraction(guess);
+  let guessKey = e.target
+  game.handleInteraction(guess, guessKey);
 });
 
 //Function to Disable key value to be called in Keyboard Listener
@@ -46,12 +46,13 @@ function disable(){
 //Keyboard Event Listener
 $(window).on('keydown', (e)=>{
   let guess = e.key;
+  let guessKey;
   for (let i = 0; i< $('button.key').length; i++){
+    guessKey = $('button.key')[i];
       if (guess === $('button.key')[i].innerText) {
-        if ($('button.key')[i].classList.value !== 'key chosen'){
-          $('button.key')[i].classList.add('chosen');
+        if ($('button.key')[i].classList.value !== 'key chosen' && $('button.key')[i].classList.value !== 'key wrong'){
           disable();
-          game.handleInteraction(guess);
+          game.handleInteraction(guess, guessKey);
         }
       }
   }
