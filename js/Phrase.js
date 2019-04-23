@@ -2,7 +2,6 @@ class Phrase {
   constructor(_phrase, hint){
     this._phrase = _phrase;
     this.hint = hint;
-    this.match = 0;
   }
 
   /**
@@ -13,7 +12,6 @@ class Phrase {
       let letter = this._phrase[i].toUpperCase();
       if (letter === " ") {
           $('#phrase ul').append(`<li class="space"></li>`);
-          this.match +=1;
       } else {
           $('#phrase ul').append(`<li class="letter">${letter}</li>`);
       }
@@ -48,7 +46,6 @@ class Phrase {
     for (let i=0; i< $('#phrase ul li').length; i++){
       if (guess === $('#phrase ul li')[i].innerText.toLowerCase()){
         $('#phrase ul li')[i].classList.add('show');
-        this.match +=1;
       }
     }
   }

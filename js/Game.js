@@ -6,57 +6,6 @@ class Game {
   }
 
   /**
-  *Onscreen Qwerty Event Listener
-  */
-  qwertyListener(){
-    $('#qwerty').on('click', 'button', (e)=> {
-      let guess = e.target.innerText;
-      $(e.target).addClass('chosen').prop('disabled', true);
-      this.activePhrase.checkLetter(guess);
-      if (this.activePhrase.checkLetter(guess) === true){
-        this.activePhrase.showMatchedLetter(guess);
-      }
-      else {
-        this.removeLife();
-      }
-      this.checkForWin();
-   });
-  }
-
-  /**
-  *Keyboard Event Listener
-  */
-  keyboardListener(){
-    $(window).on('keydown', (e)=>{
-      let guess = e.key;
-      for (let i = 0; i< $('button.key').length; i++)
-        if (guess === $('button.key')[i].innerText) {
-          $('button.key')[i].classList.add('chosen');
-          $('button.key')[i].disabled = true;
-        }
-      this.activePhrase.checkLetter(guess);
-      if (this.activePhrase.checkLetter(guess) === true){
-        this.activePhrase.showMatchedLetter(guess);
-      }
-      else {
-        this.removeLife();
-      }
-      this.checkForWin();
-    });
-  }
-
-
-
-
-  /**
-  *Listener Off resets listener for additional rounds
-  */
-  listenerOff(){
-    $('#qwerty').off();
-    $(window).off();
-  }
-
-  /**
   *Calculate Random Index Number
   */
   randomIndex(){
@@ -77,7 +26,6 @@ class Game {
     $('#game-over-message').text('');
     this.getRandomPhrase();
     this.activePhrase.addPhraseToDisplay();
-    this.handleInteraction();
   }
 
   /**
@@ -94,7 +42,6 @@ class Game {
     }
   }
 
-
   /**
   *Checks to see if Phrase is Completely revealed
   */
@@ -102,9 +49,18 @@ class Game {
     if (this.missed === 5){
       this.gameOver('lose');
     }
-    if (this.activePhrase.match === this.activePhrase._phrase.length){
+    else if ($('li.letter.show').length === $('li.letter').length){
       this.gameOver('win');
     }
+  }
+
+  /**
+  *Enables Keyboard for game reset
+  */
+  enable(){
+   document.onkeydown = function(e){
+     return true;
+   }
   }
 
 
@@ -136,7 +92,10 @@ class Game {
     //Reset keyboard
     for (let i=0; i< $('#qwerty .keyrow button').length; i++){
       $('#qwerty .keyrow button').removeClass('chosen').prop('disabled', false);
+      this.enable();
     }
+
+
 
     //Clear combadges and reset tries
     $('#scoreboard ol').children().remove();
@@ -145,17 +104,22 @@ class Game {
     }
     //Clear Puzzle
     $('#phrase ul').children().remove();
-
   }
 
 
   /**
-  *Calls interactive functions: keyboardListener( which calls checkLetter, showMatchedLetter, removeLife and check for win) -checkForWin(which calls gameOver)
+  *Calls interactive functions: checkLetter, showMatchedLetter, removeLife and check for win) -checkForWin(which calls gameOver)
   */
-  handleInteraction(){
-      this.listenerOff();
-      this.qwertyListener();
-      this.keyboardListener();
+  handleInteraction(guess){
+    this.activePhrase.checkLetter(guess);
+    if (this.activePhrase.checkLetter(guess) === true){
+      this.activePhrase.showMatchedLetter(guess);
+      this.checkForWin();
+    }
+    else {
+      this.removeLife();
+      this.checkForWin();
+    }
   }
 
 
